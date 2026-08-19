@@ -1,0 +1,22 @@
+{
+  "name": "senviok/senviok-php",
+  "description": "Official PHP SDK for the Senviok API",
+  "keywords": ["senviok", "email", "sms", "whatsapp", "otp", "sdk"],
+  "homepage": "https://senviok.live",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Senviok Engineering",
+      "email": "engineering@senviok.live"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "guzzlehttp/guzzle": "^7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Senviok\\": "src/"
+    }
+  }
+}
