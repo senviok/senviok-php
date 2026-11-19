@@ -78,6 +78,20 @@ $senviok->emails->replyInbox('inbound_msg_id', [
 ]);
 ```
 
+Each attachment must provide exactly one of `content` (base64 file bytes) or `path` (a public HTTPS URL). Optional fields are `contentType` and `contentId` (for inline CID images). For larger files, upload multipart field `file` to `POST /v1/emails/attachments` and pass the returned IDs in `attachmentIds`. The API allows up to 10 files and 10 MB total per email.
+
+The PHP SDK has a helper for the upload flow:
+
+```php
+$upload = $senviok->emails->uploadAttachment(
+    'invoice.pdf', file_get_contents('invoice.pdf'), 'application/pdf'
+);
+$senviok->emails->send([
+    'from' => 'billing@example.com', 'to' => 'customer@example.com',
+    'subject' => 'Your invoice', 'attachmentIds' => [$upload['id']],
+]);
+```
+
 ### SMS
 ```php
 $senviok->sms->send([

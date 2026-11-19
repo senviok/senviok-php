@@ -20,6 +20,12 @@ class Emails
         return $this->client->post('/v1/emails', $payload);
     }
 
+    /** Upload file bytes for use through `attachmentIds` on a later send. */
+    public function uploadAttachment(string $filename, string $contents, string $contentType = 'application/octet-stream'): array
+    {
+        return $this->client->postMultipart('/v1/emails/attachments', 'file', $filename, $contents, $contentType);
+    }
+
     /**
      * List paginated received emails for the workspace inbox.
      */

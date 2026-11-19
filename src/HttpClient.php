@@ -16,7 +16,6 @@ class HttpClient
             'headers' => [
                 'Authorization' => 'Bearer ' . $apiKey,
                 'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
             ]
         ]);
     }
@@ -46,6 +45,16 @@ class HttpClient
     public function post(string $path, array $body = []): array
     {
         return $this->request('POST', $path, ['json' => $body]);
+    }
+
+    public function postMultipart(string $path, string $field, string $filename, string $contents, string $contentType): array
+    {
+        return $this->request('POST', $path, ['multipart' => [[
+            'name' => $field,
+            'contents' => $contents,
+            'filename' => $filename,
+            'headers' => ['Content-Type' => $contentType],
+        ]]]);
     }
 
     public function put(string $path, array $body = []): array
